@@ -13,6 +13,7 @@ services:
     working_dir: /var/www/
     volumes:
       - ./:/var/www
+      - ./docker-compose/mysql/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - pastillero
   db:
@@ -20,17 +21,19 @@ services:
     container_name: pastillero-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: pastillero
-      MYSQL_PASSWORD: password
-      MYSQL_USER: eber
-      #      MYSQL_DATABASE: ${DB_DATABASE}
-      #      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      #      MYSQL_PASSWORD: ${DB_PASSWORD}
-      #      MYSQL_USER: ${DB_USERNAME}
+#      MYSQL_DATABASE: pastillero
+#      MYSQL_PASSWORD: password
+#      MYSQL_USER: eber
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./docker-compose/mysql:/var/lib/mysql
+      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - pastillero
   nginx:
@@ -41,7 +44,7 @@ services:
       - 8000:80
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d
+      - ./docker-compose/nginx/:/etc/nginx/conf.d
     networks:
       - pastillero
 networks:

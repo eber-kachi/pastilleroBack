@@ -19,28 +19,47 @@ class DatabaseSeeder extends Seeder
     {
 //         \App\Models\User::factory(1)->create();
 //        \App\Models\Rol::factory(3)->create();
-      $rol = new Rol();
-        $rol->name = 'admin';
-        $rol->name = 'admin';
-        $rol->display_name = 'admin';
+        $rol = new Rol();
+
+        $rol->name = 'encargado';
+        $rol->display_name = 'Encargado';
         $rol->enabled = 1;
         $rol->save();
 
+        $rol = new Rol();
+
+        $rol->name = 'paciente';
+        $rol->display_name = 'Paciente';
+        $rol->enabled = 1;
+        $rol->save();
+
+
         $user = new User();
-        $user->name = 'admin';
-        $user->email = 'admin@gmail.com';
-        $user->username = 'admin';
+        $user->name = 'encargado';
+        $user->email = 'encargado@gmail.com';
+        $user->username = 'encargado';
         $user->email_verified_at = now();
         $user->enabled = 1;
-        $user->password = Hash::make('admin');
+        $user->password = Hash::make('encargado');
         $user->remember_token = Str::random(10);
         $user->rol_id = 1;
         $user->save();
 
-        $this->call([
+        $user = new User();
+        $user->name = 'Paciente';
+        $user->email = 'paciente@gmail.com';
+        $user->username = 'paciente';
+        $user->email_verified_at = now();
+        $user->enabled = 1;
+        $user->password = Hash::make('paciente');
+        $user->remember_token = Str::random(10);
+        $user->rol_id = 2;
+        $user->save();
 
-            MemberSeeder::class,
-        ]);
+//        $this->call([
+//
+//            MemberSeeder::class,
+//        ]);
 
     }
 }

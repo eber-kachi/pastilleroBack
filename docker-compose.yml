@@ -3,7 +3,7 @@ services:
   app:
     build:
       args:
-        user: pi
+        user: ubuntu
         uid: 1000
       context: ./
       dockerfile: Dockerfile
@@ -21,13 +21,13 @@ services:
     container_name: pastillero-db
     restart: unless-stopped
     environment:
-#      MYSQL_DATABASE: pastillero
-#      MYSQL_PASSWORD: password
-#      MYSQL_USER: eber
-      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_DATABASE: pastillero
+      MYSQL_PASSWORD: password
+      MYSQL_USER: eber
+#      MYSQL_DATABASE: ${DB_DATABASE}
 #      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+#      MYSQL_PASSWORD: ${DB_PASSWORD}
+#      MYSQL_USER: ${DB_USERNAME}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
@@ -42,6 +42,7 @@ services:
     restart: unless-stopped
     ports:
       - 8000:80
+      - "443:443"
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx/:/etc/nginx/conf.d

@@ -19,25 +19,39 @@ services:
     networks:
       - pastillero
   db:
-#    image: mysql:5.7
+    #    image: mysql:5.7
     image: mariadb
     container_name: pastillero-db
     #    restart: unless-stopped
-    restart: always
+    restart: unless-stopped
+      tty: true
+    ports:
+      - "3306:3306"
     environment:
-      #      MYSQL_DATABASE: pastillero
-      #      MYSQL_PASSWORD: password
-      #      MYSQL_USER: eber
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_DATABASE: pastillero
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: eber
+      MYSQL_PASSWORD: password
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
-    #      - ./docker-compose/mysql:/var/lib/mysql
-    #      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    #    restart: always
+    #    environment:
+    #      #      MYSQL_DATABASE: pastillero
+    #      #      MYSQL_PASSWORD: password
+    #      #      MYSQL_USER: eber
+    #      MYSQL_DATABASE: ${DB_DATABASE}
+    #      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    #      MYSQL_PASSWORD: ${DB_PASSWORD}
+    #      MYSQL_USER: ${DB_USERNAME}
+    #      SERVICE_TAGS: dev
+    #      SERVICE_NAME: mysql
+    #    volumes:
+    #      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    #    #      - ./docker-compose/mysql:/var/lib/mysql
+    #    #      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - pastillero
   nginx:

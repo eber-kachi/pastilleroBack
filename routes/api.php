@@ -26,13 +26,13 @@ Route::post('auth/login', [AuthController::class, 'login'])->name('api.auth.logi
 //Route::get('auth/me', [AuthController::class, 'me'])
 //    ->middleware('auth:api');
 
-//Route::post('message/send', [MessageController::class, 'send'])
+//Route::post('message/send', [MessageController::class, 'send']);
 //    ->middleware('auth:api');
 //
 //Route::post('message/sendDM', [MessageController::class, 'sendDM'])
 //    ->middleware('auth:api');
 
-//Route::apiResource('users', 'App\Http\Controllers\Api\UserController');
+Route::apiResource('pacientes', 'App\Http\Controllers\Api\PacienteController');
 //Route::get('users/enabled/{id}', 'App\Http\Controllers\Api\UserController@enabled');
 //
 //Route::apiResource('rols', 'App\Http\Controllers\Api\RolController');

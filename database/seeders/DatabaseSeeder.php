@@ -56,10 +56,10 @@ class DatabaseSeeder extends Seeder
         $user->rol_id = 2;
         $user->save();
 
-//        $this->call([
-//
-//            MemberSeeder::class,
-//        ]);
+        $this->call([
+
+            PacienteSeeder::class,
+        ]);
 
     }
 }

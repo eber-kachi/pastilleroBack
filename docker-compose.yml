@@ -13,6 +13,7 @@ services:
     restart: unless-stopped
     tty: true
     working_dir: /var/www/
+
     volumes:
       - ./:/var/www
       - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini
@@ -20,11 +21,10 @@ services:
       - pastillero
   db:
     #    image: mysql:5.7
-    image: mariadb
+    image: linuxserver/mariadb
     container_name: pastillero-db
     #    restart: unless-stopped
-    restart: unless-stopped
-      tty: true
+    restart: always
     ports:
       - "3306:3306"
     environment:
@@ -35,8 +35,9 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - dbdata:/var/lib/mysql/
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
+#      - ./dbdata:/var/lib/mysql/
+#      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./dbdata:/config
     #    restart: always
     #    environment:
     #      #      MYSQL_DATABASE: pastillero
@@ -60,7 +61,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - 8000:80
+      - 8001:80
       - "443:443"
     volumes:
       - ./:/var/www

@@ -59,6 +59,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             PacienteSeeder::class,
+            TipoMedicamentoSeeder::class,
+//            MedicamentoSeeder::class
         ]);
 
     }

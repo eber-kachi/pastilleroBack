@@ -1,0 +1,17 @@
+[
+    {
+        "model-name": "Medicamento",
+        "resource-file": "medicamentos.json",
+        "table-name": "medicamentos"
+    },
+    {
+        "model-name": "PacienteMedicamento",
+        "resource-file": "paciente_medicamentos.json",
+        "table-name": "paciente_medicamentos"
+    },
+    {
+        "model-name": "TipoMedicamento",
+        "resource-file": "tipo_medicamentos.json",
+        "table-name": "tipo_medicamentos"
+    }
+]

@@ -45,12 +45,19 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->username = $request->username;
         $user->enabled = false;
-        $user->password = Hash::make($request->username);
+        $user->password = Hash::make($request->password);
+//        dd($request);
+
+//        if ($request->get('rols')) {
+//            return response()->json('error', 500);
+//        }
+
         foreach ($request->rols as $rol) {
             if ($rol->selected == true) {
                 $user->rol_id = $rol->id;
             }
         }
+
         $user->save();
 
         return response()->json(['ok' => true, 'message' => 'Se creo exitosamente'], 200);

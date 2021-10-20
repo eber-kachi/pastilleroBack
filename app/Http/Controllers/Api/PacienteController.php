@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PacienteController extends Controller
 {
@@ -37,6 +38,17 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombres' => 'required',
+            'apellidos' => 'required|string|max:50',
+            'fecha_nacimiento' => 'required|string|max:50',
+            'user_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()],422);
+        }
+
         $parcel = new Paciente();
         $parcel->nombres = $request->nombres;
         $parcel->apellidos = $request->apellidos;

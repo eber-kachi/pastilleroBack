@@ -1,0 +1,15 @@
+php artisan create:api-scaffold  TipoMedicamento --table-exists
+php artisan resource-file:from-database TipoMedicamento
+#################################################################################
+cuando sale un error
+  Class 'CrestApps\CodeGenerator\Traits\Str' not found
+
+Solucion
+
+  at C:\xampp\htdocs\pastilleroback\vendor\crestapps\laravel-code-generator\src\Traits\Migration.php:119
+poner eso en
+use CrestApps\CodeGenerator\Support\Str;
+##########################################################################3######
+
+php artisan create:api-scaffold  TipoMedicamento --table-exists
+php artisan create:api-scaffold  PacienteMedicamento --table-exists
